@@ -1,24 +1,31 @@
 use <./MX_DES_Standard.scad>
 use <./MX_DES_Thumb.scad>
 
-R1 = [
+R4 = [
       [0, 0, 0, 0, 0],
       [],
       [],
       [],
       ];
 
-R2 = [
+R3 = [
       [],
-      [1, 3, 1, 1, 1],
+      [3, 1, 1, 1, 1],
       [],
       [],
       ];
 
-R3 = [
+R2 = [
       [],
       [],
-      [2, 2, 2, 2, 2],
+      [2, 2, 2, 2, 2, 2],
+      [],
+      ];
+      
+R1 = [
+      [],
+      [],
+      [5, 5, 5, 5, 5, 5],
       [],
       ];
 
@@ -26,7 +33,7 @@ Thumb = [
 	 [],
 	 [],
 	 [],
-	 [7, 6, 3, -1, -1],
+	 [0, 1, 3, 6, 6],
 	 ];
 
 
@@ -94,7 +101,7 @@ module genside(layout) {
   }
 }
 
-row = is_undef(row) ? "r1" : row;
+row = is_undef(row) ? "thumb" : row;
 
 if (row == "r1") {
   translate([19, 0, 0])genside(R1);
@@ -109,6 +116,11 @@ if (row == "r2") {
 if (row == "r3") {
   translate([19, 0, 0])genside(R3);
   mirror([5*19, 0, 0]) genside(R3);
+ }
+ 
+if (row == "r4") {
+  translate([19, 0, 0])genside(R4);
+  mirror([5*19, 0, 0]) genside(R4);
  }
 
 if (row == "thumb") {

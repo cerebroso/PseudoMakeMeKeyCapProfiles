@@ -27,15 +27,21 @@ R1 = [
       [],
       [5, 5, 5, 5, 5, 5],
       [],
-      ];
+     ];
 
 Thumb = [
 	 [],
 	 [],
 	 [],
-	 [0, 1, 3, 6, 6],
+	 [1, 3, 6, 6],
 	 ];
 
+Thumb2 = [
+	 [],
+	 [],
+	 [],
+	 [0],
+	 ];
 
 /* Disable support generation */
 gen_support = 1;
@@ -50,7 +56,8 @@ module mjf_supports(layout, size, gen_support) {
   if (gen_support > 0) {
     color("red") {
 	translate([0,0,$radious]) {
-	translate([$radious, -size/2 + $radious - 0.45, -$radious * 3])
+    translate([$radious, -size/2 + $radious - 0.45, -$radious * 3])
+	//translate([$radious, -size/1.289 + $radious - 0.45, -$radious * 3])
 	    rotate([180,90,0])
 	    cylinder(h=size + extra_side,r=$radious);
 	translate([0, -size/2 + $radious - 0.45, -$radious + extra_heigt])
@@ -101,7 +108,7 @@ module genside(layout) {
   }
 }
 
-row = is_undef(row) ? "thumb" : row;
+row = is_undef(row) ? "r1" : row;
 
 if (row == "r1") {
   translate([19, 0, 0])genside(R1);
@@ -124,6 +131,6 @@ if (row == "r4") {
  }
 
 if (row == "thumb") {
-  translate([19, 0, 0])genside(Thumb);
-  mirror([5*19, 0, 0]) genside(Thumb);
+  translate([19, 0, 0])genside(Thumb2);
+  mirror([5*19, 0, 0]) genside(Thumb2);
  }

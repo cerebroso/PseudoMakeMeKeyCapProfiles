@@ -12,7 +12,7 @@ R4 = [
 R3 = [
       [],
       //3
-      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1],
       [],
       [],
       ];
@@ -35,14 +35,14 @@ Thumb = [
 	 [],
 	 [],
 	 [],
-	 [2, 2, 2],
+	 [2, 2, 2, 2, 2, 2],
 	 ];
 
 Thumb2 = [
 	 [],
 	 [],
 	 [],
-	 [0],
+	 [3, 3, 3, 3, 3, 3],
 	 ];
 
 /* Disable support generation */
@@ -94,7 +94,7 @@ module genside(layout) {
 	//} else {
 	  translate([19*idy, 19*idx])
 	    mjf_supports(layout=layout,size=19.16, gen_support=gen_support)
-	    keycap(
+	    thumb_keycap(
 		   keyID  = layout[idx][idy], 
 		   cutLen = 0, //Don't change. for chopped caps
 		   Stem   = true, //tusn on shell and stems
@@ -102,7 +102,7 @@ module genside(layout) {
 		   Stab   = 0, 
 		   visualizeDish = false, // turn on debug visual of Dish 
 		   crossSection  = false, // center cut to check internal
-		   homeDot = true, //turn on homedots
+		   homeDot = false, //turn on homedots
 		   Legends = false
 		   );
 	//}
@@ -111,7 +111,7 @@ module genside(layout) {
   }
 }
 
-row = is_undef(row) ? "r3" : row;
+row = is_undef(row) ? "thumb" : row;
 
 if (row == "r1") {
   translate([19, 0, 0])genside(R1);
@@ -134,6 +134,6 @@ if (row == "r4") {
  }
 
 if (row == "thumb") {
-  translate([22, 0, 0])genside(Thumb);
-  mirror([5*22, 0, 0]) genside(Thumb);
+  translate([19, 0, 0])genside(Thumb);
+  mirror([5*19, 0, 0]) genside(Thumb);
  }

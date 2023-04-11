@@ -12,7 +12,7 @@ R4 = [
 R3 = [
       [],
       //3
-      [1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1],
       [],
       [],
       ];
@@ -20,14 +20,14 @@ R3 = [
 R2 = [
       [],
       [],
-      [0,0,0,0,0,0],
+      [0,0,0,0,0],
       [],
       ];
       
 R1 = [
       [],
       [],
-      [1,1,1,1,1,1],
+      [1,1,1,1,1],
       [],
      ];
 
@@ -35,14 +35,14 @@ Thumb = [
 	 [],
 	 [],
 	 [],
-	 [2, 2, 2, 2, 2, 2],
+	 [2, 2, 2, 2, 2],
 	 ];
 
 Thumb2 = [
 	 [],
 	 [],
 	 [],
-	 [3, 3, 3, 3, 3, 3],
+	 [3, 3, 3, 3, 3],
 	 ];
 
 /* Disable support generation */
@@ -58,12 +58,12 @@ module mjf_supports(layout, size, gen_support) {
   if (gen_support > 0) {
     color("red") {
 	translate([0,0,$radious]) {
-    translate([$radious, -size/2.5 + $radious - 0.45, -$radious * 3])
-	//translate([$radious, -size/1.289 + $radious - 0.45, -$radious * 3])
+    //translate([$radious, -size/2.3 + $radious - 0.45, -$radious * 3])
+	translate([$radious, -size/1.33 + $radious - 0.45, -$radious * 3])
 	    rotate([180,90,0])
 	    cylinder(h=size + extra_side,r=$radious);
-    translate([0, -size/2.5 + $radious - 0.45, -$radious + extra_heigt])
-	//translate([0, -size/1.289 + $radious - 0.45, -$radious + extra_heigt])
+    //translate([0, -size/2.3 + $radious - 0.45, -$radious + extra_heigt])
+	translate([0, -size/1.33 + $radious - 0.45, -$radious + extra_heigt])
 	    rotate([0,180,0])
 	    cylinder(h=$radious * 2 + extra_heigt,r=$radious);
 	}
@@ -93,12 +93,13 @@ module genside(layout) {
 //			 );
 	//} else {
 	  translate([19*idy, 19*idx])
-	    mjf_supports(layout=layout,size=19.16, gen_support=gen_support)
+	    mjf_supports(layout=layout,size=17.16, gen_support=gen_support)
 	    thumb_keycap(
 		   keyID  = layout[idx][idy], 
 		   cutLen = 0, //Don't change. for chopped caps
 		   Stem   = true, //tusn on shell and stems
-		   Dish   = true, //turn on dish cut
+		   StemRot = 0,
+           Dish   = true, //turn on dish cut
 		   Stab   = 0, 
 		   visualizeDish = false, // turn on debug visual of Dish 
 		   crossSection  = false, // center cut to check internal
@@ -134,6 +135,6 @@ if (row == "r4") {
  }
 
 if (row == "thumb") {
-  translate([19, 0, 0])genside(Thumb);
-  mirror([5*19, 0, 0]) genside(Thumb);
+  translate([19, 0, 0])genside(Thumb2);
+  mirror([5*19, 0, 0]) genside(Thumb2);
  }

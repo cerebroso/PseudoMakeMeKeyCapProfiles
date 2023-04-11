@@ -1,5 +1,6 @@
 use <./MX_DES_Standard.scad>
 use <./MX_DES_Thumb.scad>
+use <./MX_DES_Convex.scad>
 
 R4 = [
       [0, 0, 0, 0, 0],
@@ -10,7 +11,8 @@ R4 = [
 
 R3 = [
       [],
-      [3, 1, 1, 1, 1],
+      //3
+      [3,3,3,3,3],
       [],
       [],
       ];
@@ -18,14 +20,14 @@ R3 = [
 R2 = [
       [],
       [],
-      [2, 2, 2, 2, 2, 2],
+      [2, 2, 2, 2, 2],
       [],
       ];
       
 R1 = [
       [],
       [],
-      [5, 5, 5, 5, 5, 5],
+      [5, 5, 5, 5, 5],
       [],
      ];
 
@@ -33,14 +35,14 @@ Thumb = [
 	 [],
 	 [],
 	 [],
-	 [1, 3, 6, 6],
+	 [3, 3, 7, 6, 6],
 	 ];
 
 Thumb2 = [
 	 [],
 	 [],
 	 [],
-	 [0],
+	 [4, 4, 4, 4, 4],
 	 ];
 
 /* Disable support generation */
@@ -57,7 +59,8 @@ module mjf_supports(layout, size, gen_support) {
     color("red") {
 	translate([0,0,$radious]) {
     translate([$radious, -size/2 + $radious - 0.45, -$radious * 3])
-	//translate([$radious, -size/1.289 + $radious - 0.45, -$radious * 3])
+    //translate([$radious, -size/1.3 + $radious - 0.45, -$radious * 3])
+	//translate([$radious, -size/1.75 + $radious - 0.45, -$radious * 3])
 	    rotate([180,90,0])
 	    cylinder(h=size + extra_side,r=$radious);
 	translate([0, -size/2 + $radious - 0.45, -$radious + extra_heigt])
@@ -108,7 +111,7 @@ module genside(layout) {
   }
 }
 
-row = is_undef(row) ? "r1" : row;
+row = is_undef(row) ? "r3" : row;
 
 if (row == "r1") {
   translate([19, 0, 0])genside(R1);
@@ -131,6 +134,6 @@ if (row == "r4") {
  }
 
 if (row == "thumb") {
-  translate([19, 0, 0])genside(Thumb2);
-  mirror([5*19, 0, 0]) genside(Thumb2);
+  translate([19, 0, 0])genside(Thumb);
+  mirror([5*19, 0, 0]) genside(Thumb);
  }
